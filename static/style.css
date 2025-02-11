@@ -1,0 +1,153 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  body {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #1a1a1a, #2c3e50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 500px;
+    transition: all 0.3s ease;
+  }
+  
+  h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+  
+  input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+  
+  button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #00b4d8, #0077b6);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
+  }
+  
+  .weather-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .weather-icon {
+    width: 100px;
+    height: 100px;
+    margin: -15px auto 10px;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+  }
+  
+  .temperature {
+    font-size: 3.5em;
+    color: #fff;
+    font-weight: 300;
+    margin: 10px 0;
+  }
+  
+  .conditions {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+  
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .detail-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .detail-item span {
+    display: block;
+    color: #fff;
+  }
+  
+  .detail-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9em;
+    margin-bottom: 5px;
+  }
+  
+  .error {
+    color: #ff6b6b;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 480px) {
+    .container {
+      padding: 20px;
+    }
+    
+    .input-group {
+      flex-direction: column;
+    }
+    
+    button {
+      width: 100%;
+    }
+  }
