@@ -1,0 +1,25 @@
+# Ignore Python compiled files and cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore SQLite database file
+weather.db
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore logs and system-generated files
+*.log
+.DS_Store
+Thumbs.db
+
+# Ignore environment variables (important for security)
+.env
+.env.local
+.env.production
+.env.development
+
+# Ignore Render or Heroku deployment directories (if applicable)
+*.render/
