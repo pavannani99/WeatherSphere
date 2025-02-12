@@ -1,0 +1,25 @@
+# WeatherSphere 🌐  
+*A modern weather dashboard with dynamic visualizations and real-time data.*  
+
+![Demo](docs/demo.gif)  
+
+## Features ✨  
+- **Real-Time Weather Data**: Powered by OpenWeatherMap API  
+- **Dynamic UI**: Glassmorphism design with adaptive backgrounds  
+- **Smart Caching**: Reduces API calls via SQLite caching  
+- **Responsive**: Works flawlessly on mobile and desktop  
+
+## Tech Stack 🛠️  
+- **Backend**: Python, Flask, SQLite  
+- **Frontend**: HTML5, CSS3 (Flexbox/Grid), Vanilla JS  
+- **APIs**: OpenWeatherMap  
+
+## Live Demo 🚀  
+[Deployed on Render](https://weathersphere.onrender.com)  
+
+## Setup Guide 📦  
+```bash
+git clone https://github.com/yourusername/WeatherSphere  
+cd WeatherSphere  
+pip install -r requirements.txt  
+python app.py  

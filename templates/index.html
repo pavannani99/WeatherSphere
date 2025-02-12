@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WeatherSphere</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>WeatherSphere</h1>
+        <div class="input-group">
+            <input type="text" id="cityInput" placeholder="Enter city (e.g., Paris, London)">
+            <button onclick="getWeather()">Search</button>
+        </div>
+        <div id="weatherResult"></div>
+    </div>
+
+    <script>
+        function getWeather() {
+            const city = document.getElementById('cityInput').value;
+            if (!city) {
+                showError("Please enter a city!");
+                return;
+            }
+
+            showLoading();
+            
+            fetch(`/weather?city=${encodeURIComponent(city)}`)
+                .then(response => {
+                    if (!response.ok) throw response;
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) throw data.error;
+                    updateUI(data);
+                    updateBackground(data.data.weather[0].main);
+                })
+                .catch(err => {
+                    if (typeof err.json === 'function') {
+                        err.json().then(errorMsg => {
+                            showError(errorMsg.error || "Unknown error");
+                        });
+                    } else {
+                        showError(err.message || "Failed to fetch weather data");
+                    }
+                });
+        }
+
+        function updateUI(data) {
+            const weather = data.data;
+            const iconUrl = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
+            
+            const html = `
+                <div class="weather-card">
+                    <img src="${iconUrl}" class="weather-icon">
+                    <div class="temperature">${Math.round(weather.main.temp)}°C</div>
+                    <div class="conditions">${weather.weather[0].description}</div>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Humidity</span>
+                            <span>${weather.main.humidity}%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Wind</span>
+                            <span>${weather.wind.speed} m/s</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Pressure</span>
+                            <span>${weather.main.pressure} hPa</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Feels Like</span>
+                            <span>${Math.round(weather.main.feels_like)}°C</span>
+                        </div>
+                    </div>
+                    <div style="margin-top:15px; color:#7f8c8d;">
+                        Source: ${data.source} • ${new Date().toLocaleTimeString()}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('weatherResult').innerHTML = html;
+        }
+
+        function showError(message) {
+            document.getElementById('weatherResult').innerHTML = `
+                <div class="error">⚠️ ${message}</div>
+            `;
+        }
+
+        function showLoading() {
+            document.getElementById('weatherResult').innerHTML = `
+                <div class="weather-card">
+                    <div style="text-align:center; padding:20px;">
+                        <div class="loading-spinner"></div>
+                        <div style="color:#fff; margin-top:10px;">Fetching weather...</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateBackground(weatherCondition) {
+            const body = document.body;
+            let gradient = '';
+            
+            switch(weatherCondition.toLowerCase()) {
+                case 'clear':
+                    gradient = 'linear-gradient(45deg, #83a4d4, #b6fbff)';
+                    break;
+                case 'clouds':
+                    gradient = 'linear-gradient(45deg, #636363, #a2ab58)';
+                    break;
+                case 'rain':
+                    gradient = 'linear-gradient(45deg, #005c97, #363795)';
+                    break;
+                case 'snow':
+                    gradient = 'linear-gradient(45deg, #e6dada, #274046)';
+                    break;
+                default:
+                    gradient = 'linear-gradient(45deg, #1a1a1a, #2c3e50)';
+            }
+            
+            body.style.background = gradient;
+        }
+    </script>
+</body>
+</html>
